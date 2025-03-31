@@ -1,0 +1,16 @@
+meta {
+  name: Get Statistics
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{json_api}}/statistics/:range
+  body: none
+  auth: inherit
+}
+
+
+params:path {
+  range: 
+}

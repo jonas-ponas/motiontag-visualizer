@@ -1,0 +1,13 @@
+[package]
+name = "geo_route_analysis"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde_json = "1.0"
+reqwest = { version = "0.12", features = ["json", "blocking"] }
+clap = { version = "4.5.32", features = ["derive"] }
+
+[[bin]]
+name = "geo_route_analysis"
+path = "src/main.rs"

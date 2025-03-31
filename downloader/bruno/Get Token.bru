@@ -1,0 +1,25 @@
+meta {
+  name: Get Token
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/token
+  body: json
+  auth: none
+}
+
+
+body:json {
+  {
+    "grant_type": "password",
+    "password": "{{password}}",
+    "username": "{{username}}"
+  }
+}
+
+script:post-response {
+  const access_token = res.body.access_token;
+  bru.setEnvVar("token", access_token);
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Get Storyline
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{base_url}}/storyline/:date
+  body: none
+  auth: inherit
+}
+
+params:path {
+  date: 2025-03-24
+}
