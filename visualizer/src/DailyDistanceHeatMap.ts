@@ -185,7 +185,7 @@ export class DailyDistanceHeatMap {
 			.attr('x', (entry) => this.xScale!(`${this.getISOWeekNumber(this.selectedEntry!.date!)}`)!)
 			.attr(
 				'y',
-				(entry) => this.yScale!(DailyDistanceHeatMap.DAYS[this.selectedEntry!.date!.getDay()])!,
+				(entry) => this.yScale!(this.getWorkDay(this.selectedEntry!.date))!,
 			)
 
 		this.tooltip.html(DailyDistanceHeatMap.getDescription(this.selectedEntry))
@@ -235,7 +235,7 @@ export class DailyDistanceHeatMap {
 			.data(this.yearlyData[this.selectedYear])
 			.join('rect')
 			.attr('x', (entry) => this.xScale!(`${this.getISOWeekNumber(entry.date)}`)!)
-			.attr('y', (entry) => this.yScale!(DailyDistanceHeatMap.DAYS[entry.date.getDay()])!)
+			.attr('y', (entry) => this.yScale!(this.getWorkDay(entry.date))!)
 			.attr('width', () => this.xScale!.bandwidth() - 5)
 			.attr('height', () => this.yScale!.bandwidth() - 5)
 			.attr('transform', 'translate(2.5, 2.5)')
@@ -292,6 +292,9 @@ export class DailyDistanceHeatMap {
 		this.drawAxis()
 		this.drawData()
 
+		this.selectedEntry = null
+		this.drawSelected();
+
 		if (String(this.selectedYear - 1) in this.yearlyData) {
 			this.prevYear.attr('class', '')
 		} else {
@@ -317,6 +320,10 @@ export class DailyDistanceHeatMap {
 			this.selectedYear = this.selectedYear + step;
 			this.redrawYear();
 		})
+	}
+
+	private getWorkDay(date: Date) {
+		return ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"][date.getDay()]
 	}
 
 	private getISOWeekNumber(date: Date): number {
