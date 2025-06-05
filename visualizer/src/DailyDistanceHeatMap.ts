@@ -12,8 +12,7 @@ export interface DailyDistanceHeatMapOptions {
 	onSelect?: (entry: Entry | null) => void
 }
 
-type d3_Element<T extends d3.BaseType> = d3.Selection<T, unknown, HTMLElement, unknown>
-
+// Ref.: https://d3-graph-gallery.com/heatmap, https://www.react-graph-gallery.com/heatmap
 export class DailyDistanceHeatMap {
 	private static HEIGHT = 200
 	private static DAYS = ['So', 'Sa', 'Fr', 'Do', 'Mi', 'Di', 'Mo']
@@ -68,7 +67,7 @@ export class DailyDistanceHeatMap {
 	constructor(element: string, options?: DailyDistanceHeatMapOptions) {
 		this.svg = d3.select(element).append('svg')
 
-		this.footer = d3.select('#heat').append('div').attr('class', 'footer')
+		this.footer = d3.select(element).append('div').attr('class', 'footer')
 
 		this.tooltip = this.footer.append('div').attr('class', 'tooltip').text('')
 
