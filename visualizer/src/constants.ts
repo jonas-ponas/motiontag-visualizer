@@ -80,3 +80,37 @@ export function getIconForPurpose(purpose: string) {
 			return new Icon({ iconUrl: Circle })
 	}
 }
+
+export function getGroupForMode(mode: string) {
+	switch (mode) {
+		case 'Hiking':
+		case 'Walk':
+			return 'Walk'
+		case 'LightRail':
+		case 'RegionalTrain':
+		case 'Train':
+		case 'Subway':
+		case 'Tram':
+		case 'Bus':
+			return 'PublicTransit'
+		case 'Ecar':
+		case 'Car':
+		case 'Ridepooling':
+		case 'Carsharing':
+			return 'Car'
+		case 'Bicycle':
+		case 'Ebicycle':
+		case 'Bikesharing':
+		case 'KickScooter':
+			return 'Micromobility'
+		case 'Airplane':
+			return 'Plane'
+		case 'Boat':
+		case 'Ferry':
+			return 'Boat'
+		default:
+			console.log('No group for:', mode)
+		case 'Cablecar':
+			return 'Unknown'
+	}
+}
