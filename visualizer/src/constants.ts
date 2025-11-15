@@ -43,6 +43,11 @@ export function getColorForMode(mode: string) {
 		case 'Boat':
 		case 'Ferry':
 			return '#6d6db0'
+		case 'Coach':
+			return '#a4419f'
+		case 'Taxi':
+		case 'TaxiUber':
+			return '#f0d722'
 		default:
 			console.log('No color for:', mode)
 		case 'Cablecar':
@@ -78,5 +83,43 @@ export function getIconForPurpose(purpose: string) {
 			console.log('Unknown purpose:', purpose)
 		case 'unknown':
 			return new Icon({ iconUrl: Circle })
+	}
+}
+
+export function getGroupForMode(mode: string) {
+	switch (mode) {
+		case 'Hiking':
+		case 'Walk':
+			return 'Walk'
+		case 'LightRail':
+		case 'RegionalTrain':
+		case 'Train':
+		case 'Subway':
+		case 'Tram':
+		case 'Bus':
+		case 'Coach':
+			return 'PublicTransit'
+		case 'TaxiUber':
+		case 'Taxi':
+			// return 'Taxi'
+		case 'Ecar':
+		case 'Car':
+		case 'Ridepooling':
+		case 'Carsharing':
+			return 'Car'
+		case 'Bicycle':
+		case 'Ebicycle':
+		case 'Bikesharing':
+		case 'KickScooter':
+		case 'Scooter':
+			return 'Micromobility'
+		case 'Airplane':
+			return 'Plane'
+		default:
+			console.log('No group for:', mode)
+		case 'Boat':
+		case 'Ferry':
+		case 'Cablecar':
+			return 'Other'
 	}
 }
