@@ -43,6 +43,11 @@ export function getColorForMode(mode: string) {
 		case 'Boat':
 		case 'Ferry':
 			return '#6d6db0'
+		case 'Coach':
+			return '#a4419f'
+		case 'Taxi':
+		case 'TaxiUber':
+			return '#f0d722'
 		default:
 			console.log('No color for:', mode)
 		case 'Cablecar':
@@ -92,7 +97,11 @@ export function getGroupForMode(mode: string) {
 		case 'Subway':
 		case 'Tram':
 		case 'Bus':
+		case 'Coach':
 			return 'PublicTransit'
+		case 'TaxiUber':
+		case 'Taxi':
+			// return 'Taxi'
 		case 'Ecar':
 		case 'Car':
 		case 'Ridepooling':
@@ -102,15 +111,15 @@ export function getGroupForMode(mode: string) {
 		case 'Ebicycle':
 		case 'Bikesharing':
 		case 'KickScooter':
+		case 'Scooter':
 			return 'Micromobility'
 		case 'Airplane':
 			return 'Plane'
-		case 'Boat':
-		case 'Ferry':
-			return 'Boat'
 		default:
 			console.log('No group for:', mode)
+		case 'Boat':
+		case 'Ferry':
 		case 'Cablecar':
-			return 'Unknown'
+			return 'Other'
 	}
 }

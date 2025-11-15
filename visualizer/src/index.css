@@ -1,121 +1,109 @@
 body {
-	margin: 0;
-	padding: 0;
-	font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 #map {
-	width: 100dvw;
-	height: calc(100dvh - 210px - 2em);
-	/* screen - heatmap - footer - margin */
+    width: 100dvw;
+    height: calc(100dvh - 210px - 2em);
+    /* screen - heatmap - footer - margin */
 }
 
 .statistics {
-	width: calc(100dvw - 2em);
-	/* screen - margin */
-	height: calc(210px + 1em);
-	/* heatmap + footer */
-	display: flex;
-	flex-direction: row;
-	margin: 0.5em 1em 0 1em;
+    width: calc(100dvw - 2em);
+    /* screen - margin */
+    height: calc(210px + 1em);
+    /* heatmap + footer */
+    display: flex;
+    flex-direction: row;
+    margin: 0.5em 1em 0 1em;
 }
 
 #heat {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    user-select: none;
 }
 
-
-#heat>.footer {
-	display: flex;
-	justify-content: space-between;
-	height: 1em;
-	font-size: x-small;
-	visibility: hidden;
-	margin-left: 0 23px 0 23px;
+.footer {
+    display: flex;
+    justify-content: space-between;
+    height: 1em;
+    font-size: x-small;
 }
 
-#heat>.footer>.select {
-	display: flex;
-	gap: 1em;
+#heat > .footer {
+    visibility: hidden;
 }
 
-#heat>.footer>.select>.current {
-	font-weight: bolder;
+.footer > .select {
+    display: flex;
+    gap: 1em;
 }
 
-#heat>.footer>.select>a {
-	color: black;
-	text-decoration: underline;
+.footer > .select > .current {
+    font-weight: bolder;
 }
 
-#heat>.footer>.select>a.disabled {
-	text-decoration: none;
-	color: #ccc;
-	pointer-events: none;
+.footer > .select > a {
+    color: black;
+    text-decoration: underline;
+}
+
+.footer > .select > a.disabled {
+    text-decoration: none;
+    color: #ccc;
+    pointer-events: none;
 }
 
 #distribution {
-	background-color: #eee;
-	height: 210px;
-	width: calc(100dvw - 1396px);
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-
-	color: #ccc;
+    height: 226px;
+    width: calc(100dvw - 1396px - 2em); /* - HEATMAP_SIZE - MARGIN_RIGHT */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
-
-#distribution::before {
-	content: "space for pie chart(s)";
+#distribution > .footer {
+    width: calc(100dvw - 1396px - 2em - 4em);
+    padding-right: 2em;
+    padding-left: 2em;
 }
-
 .leaflet-control-load-csv {
-	font: bold 18px "Lucida Console", Monaco, monospace;
-	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
-	border-radius: 4px;
-	background-color: #fff;
-	border-bottom: 1px solid #ccc;
-	width: 26px;
-	height: 26px;
-	line-height: 26px;
-	display: block;
-	text-align: center;
-	text-decoration: none;
-	color: black;
+    font:
+        bold 18px "Lucida Console",
+        Monaco,
+        monospace;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    border-radius: 4px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: black;
 }
 
-.leaflet-control-load-csv>img {
-	margin-top: 4px;
-	height: 22px;
-	width: 22px;
-	user-select: none;
+.leaflet-control-load-csv > img {
+    margin-top: 4px;
+    height: 22px;
+    width: 22px;
+    user-select: none;
 }
 
-.leaflet-control-load-csv::hover {
-	cursor: pointer;
+.leaflet-control-load-csv:hover {
+    cursor: pointer;
 }
 
-#backdrop {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1000;
-	background-color: #0d161bde;
-	color: #fff;
-	height: 100dvh;
-	width: 100dvw;
-	display: none;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+rect[data-mode]:hover {
+    cursor: pointer;
 }
 
-#backdrop>div {
-	height: 50px;
+#heat > svg > g > g[role="data"] > rect:hover {
+    cursor: pointer;
 }

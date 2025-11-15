@@ -5,12 +5,14 @@ import { getColorForMode, getIconForPurpose } from './constants'
 import { VisualizeControl } from './controls/VisualizeControl'
 import './index.css'
 import { MotionTagDataParser } from './parser/motionTagDataParser'
+import { GroupedTreeMap } from './GroupedTreeMap'
 
 const parser = new MotionTagDataParser()
 const dailyDistance = new DailyDistanceHeatMap('#heat', {
 	onSelect: showTracksForSelectedDate,
 })
 
+const treeMap = new GroupedTreeMap('#distribution')
 dailyDistance.drawInitial();
 
 const map = new LeafletMap('map', {
@@ -122,6 +124,7 @@ export async function setData(d: string) {
 	console.log('Parsing data took', `${Date.now() - start}ms`)
 
 	dailyDistance.setData(Object.values(parser.getDistanceHeatMap()))
+	treeMap.setData(parser.getMovements())
 
 	// "HeatMap"
 	for (const movement of parser.getMovements()) {
