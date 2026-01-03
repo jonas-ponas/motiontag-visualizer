@@ -1,1 +1,22 @@
+# Data files
 *.csv
+*.parquet
+
+# Rust
+debug/
+target/
+local/
+
+# Bruno
+bruno/environments/*.bru
+!bruno/environments/Example.bru
+
+**/*.rs.bk
+
+*.pdb
+
+# Python / Juypter
+__pycache__
+.venv
+.zed
+.ipynb_checkpoints

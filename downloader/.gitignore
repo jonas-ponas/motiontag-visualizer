@@ -1,9 +1,0 @@
-debug/
-target/
-local/
-bruno/environments/*.bru
-!bruno/environments/Example.bru
-
-**/*.rs.bk
-
-*.pdb

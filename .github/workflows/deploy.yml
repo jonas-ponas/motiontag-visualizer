@@ -16,7 +16,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
+  # Build job for downloader CLI
+  build-downloader:
+    runs-on: ubuntu-latest
+    env:
+      CARGO_TERM_COLOR: always
+    steps:
+    - name: Checkout 
+      uses: actions/checkout@v4
+    # Cache?
+    - name: Build
+      run: cd ./downloader && cargo build --verbose
+    - name: Run tests
+      run: cd ./downloader && cargo test --verbose
+
+  # Build job for visualizer webapp
   build-visualizer:
     runs-on: ubuntu-latest
     steps:
@@ -42,7 +56,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
 
-  # Deployment job
+  # Deployment job for visualizer webapp
   deploy-visualizer:
     environment:
       name: github-pages
