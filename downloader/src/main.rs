@@ -34,8 +34,8 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let client = if args.token == "" {
-        if args.username == "" || args.password == "" {
+    let client = if args.token.is_empty() {
+        if args.username.is_empty()|| args.password.is_empty() {
             eprintln!("Username and password is missing.");
             exit(1);
         }

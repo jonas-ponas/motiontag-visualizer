@@ -87,12 +87,21 @@ impl ApiClient {
             return Ok(items);
         }
 
-        return Err(format!(
+        Err(format!(
             "Failed to retrieve days. Response code: {}",
             response.status()
-        )
-        .into());
+        ).into())
     }
+}
+
+
+#[derive(Debug, Deserialize)]
+#[serde(tag = "type", content = "coordinates")]
+pub enum GeoJson {
+    Point((f64, f64)),
+    LineString(Vec<(f64, f64)>),
+    // MultiLineString is not supported yet
+    MultiLineString(#[allow(unused)] Vec<Vec<(f64, f64)>>),
 }
 
 #[derive(Default, Deserialize)]
@@ -106,18 +115,17 @@ pub struct StorylineItem {
     pub mode: Option<String>,
     // pub confirmed: bool,
     // pub belongs_to_previous: Option<bool>,
-    pub geometry: Option<Value>,
+    pub geometry: Option<GeoJson>,
     pub purpose: Option<String>,
 }
 
 impl StorylineItem {
     pub fn to_csv_line(&self) -> String {
-        let mut geometry: String = "".to_string();
-        if self.geometry.is_some() {
-            geometry = wkb_serializer::geojson_to_wkb(self.geometry.as_ref().unwrap())
-        }
+        let geometry = self.geometry.as_ref()
+            .map(|geometry| wkb_serializer::geojson_to_wkb(geometry))
+            .unwrap_or_default();
 
-        return format!(
+        format!(
             "{};;{};{};;{};;{};;{};{};{};;;;;;;;;;;;",
             self.uuid,
             self.typ,
@@ -127,11 +135,11 @@ impl StorylineItem {
             self.mode.clone().unwrap_or_default(),
             self.purpose.clone().unwrap_or_default(),
             geometry
-        );
+        )
     }
 
     pub fn csv_headline() -> String {
-        return "id;user_id;type;started_at;started_at_timezone;finished_at;finished_at_timezone;length;detected_mode;mode;purpose;geometry;confirmed_at;started_on;misdetected_completely;merged;created_at;updated_at;started_at_in_timezone;finished_at_in_timezone;confirmed_at_in_timezone;created_at_in_timezone;updated_at_in_timezone;comment_feedback".to_string();
+        "id;user_id;type;started_at;started_at_timezone;finished_at;finished_at_timezone;length;detected_mode;mode;purpose;geometry;confirmed_at;started_on;misdetected_completely;merged;created_at;updated_at;started_at_in_timezone;finished_at_in_timezone;confirmed_at_in_timezone;created_at_in_timezone;updated_at_in_timezone;comment_feedback".to_string()
     }
 }
 
@@ -162,9 +170,9 @@ fn get_token(
         return Ok(token.to_string());
     }
 
-    return Err(format!(
+    Err(format!(
         "Failed to retrieve token. Reponse code: {}",
         response.status()
     )
-    .into());
+    .into())
 }
