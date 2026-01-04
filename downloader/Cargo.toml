@@ -1,5 +1,5 @@
 [package]
-name = "geo_route_analysis"
+name = "downloader"
 version = "0.1.0"
 edition = "2021"
 
@@ -10,5 +10,5 @@ reqwest = { version = "0.12", features = ["json", "blocking"] }
 clap = { version = "4.5.32", features = ["derive"] }
 
 [[bin]]
-name = "geo_route_analysis"
+name = "downloader"
 path = "src/main.rs"
