@@ -8,8 +8,8 @@ target/
 local/
 
 # Bruno
-bruno/environments/*.bru
-!bruno/environments/Example.bru
+**/bruno/environments/*.bru
+!**/bruno/environments/Example.bru
 
 **/*.rs.bk
 
